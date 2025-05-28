@@ -27,7 +27,7 @@ export default function CoursesPage() {
   });
 
   const filteredCourses = courses.filter(course => {
-    if (levelFilter && course.level !== levelFilter) return false;
+    if (levelFilter && levelFilter !== "" && course.level !== levelFilter) return false;
     return true;
   });
 
@@ -62,7 +62,7 @@ export default function CoursesPage() {
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Categories</SelectItem>
+                <SelectItem value="all">All Categories</SelectItem>
                 {categories.map(category => (
                   <SelectItem key={category.id} value={category.id.toString()}>
                     {category.name}
