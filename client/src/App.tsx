@@ -14,6 +14,11 @@ import CoursePlayerPage from "@/pages/course-player-page";
 import DashboardPage from "@/pages/dashboard-page";
 import InstructorDashboardPage from "@/pages/instructor-dashboard-page";
 import CreateCoursePage from "@/pages/create-course-page";
+import AboutPage from "@/pages/about-page";
+import ContactPage from "@/pages/contact-page";
+import PricingPage from "@/pages/pricing-page";
+import FAQPage from "@/pages/faq-page";
+import CheckoutPage from "@/pages/checkout-page";
 import NotFound from "@/pages/not-found";
 
 function Router() {
