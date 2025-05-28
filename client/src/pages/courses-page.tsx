@@ -11,8 +11,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CoursesPage() {
   const [search, setSearch] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState<string>("");
-  const [levelFilter, setLevelFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [levelFilter, setLevelFilter] = useState<string>("all");
 
   const { data: categories = [] } = useQuery<Category[]>({
     queryKey: ["/api/categories"],
