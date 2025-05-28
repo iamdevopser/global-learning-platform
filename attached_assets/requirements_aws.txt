@@ -1,0 +1,120 @@
+# AWS Free Tier Deployment Requirements for EduSuccessTracker
+
+## Infrastructure Requirements (Free Tier Optimized)
+
+### Compute
+- AWS EC2 t2.micro instance (Free tier eligible)
+  - 1 vCPU
+  - 1 GB RAM
+  - 30 GB EBS storage (Free tier: 30GB/month)
+  - Ubuntu 22.04 LTS
+  - Free tier: 750 hours/month for 12 months
+
+### Database
+- AWS RDS PostgreSQL (Free tier eligible)
+  - db.t2.micro instance
+  - 20 GB storage
+  - Single AZ
+  - Free tier: 750 hours/month for 12 months
+  - Backup retention: 7 days
+
+### Storage
+- AWS S3 Standard
+  - Free tier: 5GB storage
+  - Free tier: 20,000 GET requests
+  - Free tier: 2,000 PUT requests
+  - Estimated usage within free tier limits
+
+### CDN
+- AWS CloudFront
+  - Free tier: 1TB data transfer/month
+  - Free tier: 2,000,000 HTTP/HTTPS requests
+  - Free tier: 2,000,000 function invocations
+
+### Networking
+- AWS Route 53
+  - Free tier: 50 hosted zones
+  - Free tier: 1 million queries/month
+- AWS Certificate Manager
+  - Free SSL certificates
+  - No monthly cost
+
+### Security
+- AWS WAF
+  - Free tier: 1 million requests/month
+- AWS IAM
+  - Always free
+  - No monthly cost
+
+### Monitoring
+- AWS CloudWatch
+  - Free tier: 10 custom metrics
+  - Free tier: 1 million API requests
+  - Free tier: 5GB log data ingestion
+
+## Cost Optimization (Free Tier Focus)
+- Utilize all free tier benefits
+- Monitor usage to stay within free tier limits
+- Implement auto-shutdown for non-production hours
+- Use spot instances when free tier is exhausted
+- Implement proper resource tagging for cost tracking
+
+## Deployment Strategy
+1. Use AWS Elastic Beanstalk (Free tier eligible)
+2. Implement CI/CD using GitHub Actions (Free)
+3. Use AWS CodeBuild (Free tier: 100 minutes/month)
+4. Implement blue-green deployment strategy
+
+## Backup Strategy
+- Daily automated backups for RDS (within free tier)
+- S3 versioning enabled
+- Regular backup testing
+- Monitor backup storage usage
+
+## Security Requirements
+- AWS Shield Standard (Free)
+- VPC with security groups
+- Regular security audits
+- Data encryption at rest and in transit
+- Regular security patches and updates
+
+## Performance Requirements
+- Application response time < 200ms
+- 99.9% uptime SLA
+- Auto-scaling based on CPU utilization
+- CDN caching for static content
+
+## Compliance Requirements
+- GDPR compliance
+- Data privacy controls
+- Regular compliance audits
+- Data retention policies
+
+## Maintenance Requirements
+- Regular security updates
+- Database maintenance windows
+- Performance monitoring
+- Regular backup testing
+
+## Free Tier Limitations
+- EC2: 750 hours/month for 12 months
+- RDS: 750 hours/month for 12 months
+- S3: 5GB storage
+- CloudFront: 1TB data transfer/month
+- Route 53: 50 hosted zones
+- CloudWatch: 10 custom metrics
+
+## Estimated Monthly Costs (Free Tier)
+- EC2: $0 (Free tier)
+- RDS: $0 (Free tier)
+- S3: $0 (Free tier)
+- CloudFront: $0 (Free tier)
+- Route 53: $0 (Free tier)
+- Total estimated: $0/month (within free tier limits)
+
+## Important Notes
+1. Free tier benefits expire after 12 months
+2. Monitor usage to avoid exceeding free tier limits
+3. Implement auto-shutdown for non-production hours
+4. Use resource tagging for better cost tracking
+5. Regular monitoring of free tier usage 
