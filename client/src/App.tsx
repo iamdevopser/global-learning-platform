@@ -28,6 +28,11 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/courses" component={CoursesPage} />
       <Route path="/courses/:id" component={CourseDetailPage} />
+      <Route path="/about" component={AboutPage} />
+      <Route path="/contact" component={ContactPage} />
+      <Route path="/pricing" component={PricingPage} />
+      <Route path="/faq" component={FAQPage} />
+      <Route path="/checkout" component={CheckoutPage} />
       <ProtectedRoute path="/learn/:id" component={CoursePlayerPage} />
       <ProtectedRoute path="/dashboard" component={DashboardPage} />
       <ProtectedRoute path="/instructor" component={InstructorDashboardPage} />

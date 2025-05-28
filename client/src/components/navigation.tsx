@@ -46,9 +46,10 @@ export default function Navigation() {
 
   const navLinks = [
     { href: "/courses", label: "Courses" },
-    { href: "/categories", label: "Categories" },
-    { href: "/teach", label: "Teach" },
-    { href: "/business", label: "Business" },
+    { href: "/about", label: "About" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
