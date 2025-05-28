@@ -1,0 +1,71 @@
+
+🎯 Purpose of the Project
+Based on the project structure and content, this platform is designed to:
+- Help students reinforce their school lessons,
+- Allow teachers to create and sell courses,
+- Provide user accounts and optional mentorship features,
+- Establish a modern and modular online course marketplace.
+
+It uses modern technologies such as React + TypeScript + Vite on the frontend, Express.js on the backend, and Drizzle ORM with PostgreSQL for the database.
+
+✅ Completed Work So Far
+
+📁 Project Setup
+- Uses Vite for frontend build and Express.js with TypeScript for the backend.
+- Config files like tsconfig.json, postcss, tailwind.config.ts, and vite.config.ts are in place.
+
+⚙️ Tech Stack
+- Frontend: React + TypeScript + Tailwind CSS + Vite
+- Backend: Express.js (in TypeScript)
+- Database: Drizzle ORM (likely with PostgreSQL)
+- UI Library: Radix UI components
+- Forms: React Hook Form
+- Validation: @hookform/resolvers
+
+🧪 Scripts from package.json
+- dev: Starts development server.
+- build: Compiles frontend and backend.
+- start: Runs production build.
+- db:push: Pushes DB schema via Drizzle ORM.
+
+📌 Current Gaps / To-Do Items
+
+1. Frontend Pages / Components
+- Student / Teacher dashboards
+- Course browsing, purchasing, watching
+- Login / register screens
+- Mentorship booking system
+
+2. Backend Functionality
+- server/index.ts exists, but detailed APIs (user, course, payment) may not yet be developed.
+
+3. Database Schema
+- drizzle.config.ts is found, but schema.ts definitions are likely missing or incomplete.
+
+4. User Roles and Authorization
+- Role-based access (student vs. teacher) not yet built.
+- No auth system (e.g., JWT, OAuth, email verification).
+
+5. Payment Integration
+- Stripe, PayPal, or other systems not yet integrated.
+
+🧭 Next Steps
+
+A. Define an MVP (Minimum Viable Product)
+1. Define user models (Student, Teacher)
+2. Build auth system with roles
+3. Add course creation/listing/viewing logic
+4. Implement cart & payment flow (Stripe suggested)
+5. Create basic user dashboards
+
+B. Technical Development Tasks
+- Setup React project structure (/src/pages, /components, /lib)
+- Build REST API routes (/api/users, /api/courses, etc.)
+- Create Drizzle schema.ts (users, courses, enrollments, payments)
+- Add i18n system for multi-language support (e.g., react-i18next)
+
+C. Optional Advanced Features
+- Mentorship calendar booking system
+- Review and rating system
+- Notification infrastructure
+- Admin panel (course approval, user moderation)
