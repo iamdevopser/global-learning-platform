@@ -27,7 +27,7 @@ export default function CoursesPage() {
   });
 
   const filteredCourses = courses.filter(course => {
-    if (levelFilter && levelFilter !== "" && course.level !== levelFilter) return false;
+    if (levelFilter && levelFilter !== "all" && course.level !== levelFilter) return false;
     return true;
   });
 
@@ -76,7 +76,7 @@ export default function CoursesPage() {
                 <SelectValue placeholder="All Levels" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Levels</SelectItem>
+                <SelectItem value="all">All Levels</SelectItem>
                 <SelectItem value="beginner">Beginner</SelectItem>
                 <SelectItem value="intermediate">Intermediate</SelectItem>
                 <SelectItem value="advanced">Advanced</SelectItem>
