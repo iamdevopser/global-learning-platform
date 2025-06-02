@@ -173,38 +173,43 @@ resource "aws_instance" "app" {
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
-              # Install Node (LTS)
-              curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
-              yum install -y nodejs git
-              # Install PM2 and Nginx
-              npm install -g pm2
-              amazon-linux-extras enable nginx1
-              yum install -y nginx
-              systemctl enable nginx --now
-              # Clone your app (replace with your repo)
-              mkdir -p /opt
+              yum install -y docker
+              systemctl enable docker
+              systemctl start docker
+
+              # Install AWS CLI
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              yum install -y unzip
+              unzip awscliv2.zip
+              ./aws/install
+
+              # Login to ECR
+              aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 788262643345.dkr.ecr.us-east-1.amazonaws.com
+
+              # Pull the Docker image
+              docker pull 788262643345.dkr.ecr.us-east-1.amazonaws.com/global-learning-platform:latest
+
+              # Create a docker-compose file
+              cat > /opt/docker-compose.yml << 'DOCKERCOMPOSE'
+              version: '3'
+              services:
+                app:
+                  image: 788262643345.dkr.ecr.us-east-1.amazonaws.com/global-learning-platform:latest
+                  ports:
+                    - "3000:3000"
+                  environment:
+                    - NODE_ENV=production
+                    - DATABASE_URL=postgresql://postgres:${var.db_password}@${aws_db_instance.postgres.address}:5432/postgres
+                  restart: always
+              DOCKERCOMPOSE
+
+              # Install docker-compose
+              curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              chmod +x /usr/local/bin/docker-compose
+
+              # Start the application
               cd /opt
-              git clone https://github.com/your-org/global-learning-platform.git
-              cd global-learning-platform
-              npm install --production
-              pm2 start ecosystem.config.cjs
-              pm2 save
-              # Simple Nginx reverse proxy
-              cat > /etc/nginx/conf.d/glp.conf <<NGINX
-              server {
-                listen 80;
-                server_name _;
-                location / {
-                  proxy_pass http://localhost:3000;
-                  proxy_http_version 1.1;
-                  proxy_set_header Upgrade $http_upgrade;
-                  proxy_set_header Connection 'upgrade';
-                  proxy_set_header Host $host;
-                  proxy_cache_bypass $http_upgrade;
-                }
-              }
-              NGINX
-              systemctl reload nginx
+              docker-compose up -d
               EOF
 
   tags = {
@@ -245,6 +250,22 @@ resource "aws_db_instance" "postgres" {
   tags = {
     Name = "glp-postgres"
   }
+}
+
+##############################
+# ECR Repository
+##############################
+resource "aws_ecr_repository" "app" {
+  name                 = "global-learning-platform"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
+output "ecr_repository_url" {
+  value = aws_ecr_repository.app.repository_url
 }
 
 ##############################

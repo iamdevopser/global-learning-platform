@@ -296,3 +296,22 @@ echo "🎉 Deployment complete! Check deployment-info.txt for details."
 echo "🌐 Your application will be available at: http://$PUBLIC_IP:5000"
 echo "🔑 SSH access: ssh -i ${KEY_NAME}.pem ubuntu@$PUBLIC_IP"
 echo "🗄️ Database endpoint: $RDS_ENDPOINT"
+
+# Get AWS account ID
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+AWS_REGION=$(aws configure get region)
+ECR_REPO_NAME="global-learning-platform"
+
+# Login to ECR
+aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+# Build the Docker image
+docker build -t $ECR_REPO_NAME .
+
+# Tag the image
+docker tag $ECR_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
+
+# Push the image to ECR
+docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO_NAME:latest
+
+echo "Image pushed successfully to ECR"
