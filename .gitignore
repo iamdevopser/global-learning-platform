@@ -1,5 +1,16 @@
 node_modules
+npm-debug.log
 dist
+.git
+.gitignore
+.env
+*.md
+.vscode
+.idea
+terraform*
+*.tfstate*
+.terraform/
+.terraform.lock.hcl
 .DS_Store
 server/public
 vite.config.ts.*
